@@ -1,0 +1,90 @@
+<div class="page px-4" *ngIf="!loading; else loadingTpl">
+
+  <div class="header">
+    <h3>{{ product.name }}</h3>
+
+    <div class="btn-group">
+      <button class="btn btn-outline-primary"
+              [routerLink]="['/products', product.id, 'edit']">
+        Modifica
+      </button>
+
+      <button class="btn btn-outline-danger"
+              (click)="deleteProduct()">
+        Elimina
+      </button>
+
+      <button class="btn btn-secondary"
+              [routerLink]="['/products']">
+        Torna alla lista
+      </button>
+    </div>
+  </div>
+
+  <div class="detail-card">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h6>SKU</h6>
+        <p class="value">{{ product.sku }}</p>
+      </div>
+
+      <div class="col-md-6">
+        <h6>Categoria</h6>
+        <p class="value">{{ category?.name }}</p>
+      </div>
+
+      <div class="col-md-6">
+        <h6>Stock</h6>
+        <p class="value">
+          {{ product.stock }}
+          <span class="badge stock-badge" [ngClass]="getStockBadgeClass()">
+            {{ getStockBadgeClass() | titlecase }}
+          </span>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <h6>Stock minimo</h6>
+        <p class="value">{{ product.minStock }}</p>
+      </div>
+
+      <div class="col-md-6">
+        <h6>Prezzo</h6>
+        <p class="value">{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<div class="detail-card mt-4">
+  <h6 class="mb-3">Storico Movimenti</h6>
+
+  <table class="table table-sm align-middle">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Tipo</th>
+        <th>Quantità</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of movements">
+        <td>{{ m.date }}</td>
+        <td>
+          <span class="badge" [ngClass]="m.type === 'IN' ? 'bg-success' : 'bg-danger'">
+            {{ m.type }}
+          </span>
+        </td>
+        <td>{{ m.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="px-4 py-5 text-center text-muted">
+    Caricamento prodotto...
+  </div>
+</ng-template>

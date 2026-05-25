@@ -1,0 +1,81 @@
+<div class="page px-4" *ngIf="!loading; else loadingTpl">
+
+  <div class="page-header">
+    <h3>Prodotti</h3>
+
+    <div class="actions">
+      <input type="text"
+             class="form-control form-control-sm"
+             placeholder="Cerca per nome o SKU..."
+             (input)="onSearch($event.target.value)">
+
+      <button class="btn btn-sm btn-primary"
+              [routerLink]="['/products/new']">
+        + Nuovo Prodotto
+      </button>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>SKU</th>
+          <th>Categoria</th>
+          <th class="text-end">Stock</th>
+          <th class="text-end">Prezzo</th>
+          <th class="text-center">Stato</th>
+          <th class="text-end">Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of filtered">
+          <td>{{ p.name }}</td>
+          <td><span class="sku">{{ p.sku }}</span></td>
+          <td>{{ getCategoryName(p.categoryId) }}</td>
+          <td class="text-end">{{ p.stock }}</td>
+          <td class="text-end">{{ p.price | currency:'EUR':'symbol':'1.2-2' }}</td>
+          <td class="text-center">
+            <span class="badge stock-badge"
+                  [ngClass]="getStockBadgeClass(p)">
+              {{ getStockBadgeClass(p) | titlecase }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group btn-group-sm">
+              <button class="btn btn-outline-secondary"
+                      [routerLink]="['/products', p.id]">
+                      <i class="bi bi-eye"></i>
+                Dettaglio
+              </button>
+              <button class="btn btn-outline-primary"
+                      [routerLink]="['/products', p.id, 'edit']">
+                      <i class="bi bi-pencil"></i>
+                Modifica
+              </button>
+              <button class="btn btn-outline-danger"
+                      (click)="deleteProduct(p)">
+                      <i class="bi bi-trash"></i>
+                Elimina
+              </button>
+            </div>
+          </td>
+        </tr>
+
+        <tr *ngIf="filtered.length === 0">
+          <td colspan="7" class="text-center text-muted py-4">
+            Nessun prodotto trovato.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<ng-template #loadingTpl>
+  <div class="px-4 py-5 text-center text-muted">
+    Caricamento prodotti...
+  </div>
+</ng-template>

@@ -1,0 +1,27 @@
+.page {
+  padding-top: 1.5rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.page-header .actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.table-wrapper {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e3e6ee;
+  padding: 1rem;
+}
+
+.badge {
+  font-size: 0.8rem;
+}

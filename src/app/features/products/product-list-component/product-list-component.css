@@ -1,0 +1,53 @@
+.page {
+  padding-top: 1.5rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.page-header h3 {
+  margin: 0;
+}
+
+.page-header .actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.table-wrapper {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e3e6ee;
+  padding: 1rem;
+}
+
+.sku {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.stock-badge {
+  min-width: 70px;
+}
+
+.stock-badge.low {
+  background-color: #ffe5e5;
+  color: #c1121f;
+}
+
+.stock-badge.medium {
+  background-color: #fff3cd;
+  color: #b58100;
+}
+
+.stock-badge.high {
+  background-color: #e6f4ea;
+  color: #137333;
+}

@@ -1,0 +1,22 @@
+.page {
+  padding-top: 1.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.edit-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e3e6ee;
+  padding: 1.5rem;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #495057;
+}

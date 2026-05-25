@@ -1,0 +1,64 @@
+<div class="page px-4" *ngIf="!loading; else loadingTpl">
+
+  <div class="header">
+    <h3>Modifica Prodotto</h3>
+    <button class="btn btn-secondary" [routerLink]="['/products', product.id]">
+      Annulla
+    </button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="save()" class="edit-card">
+
+    <div class="row g-3">
+
+      <div class="col-md-6">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" formControlName="name">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">SKU</label>
+        <input type="text" class="form-control" formControlName="sku">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Categoria</label>
+        <select class="form-select" formControlName="categoryId">
+          <option *ngFor="let c of categories" [value]="c.id">
+            {{ c.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Prezzo (€)</label>
+        <input type="number" class="form-control" formControlName="price" step="0.01">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Stock</label>
+        <input type="number" class="form-control" formControlName="stock">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Stock minimo</label>
+        <input type="number" class="form-control" formControlName="minStock">
+      </div>
+
+    </div>
+
+    <div class="mt-4 text-end">
+      <button class="btn btn-primary" [disabled]="form.invalid">
+        Salva Modifiche
+      </button>
+    </div>
+
+  </form>
+
+</div>
+
+<ng-template #loadingTpl>
+  <div class="px-4 py-5 text-center text-muted">
+    Caricamento prodotto...
+  </div>
+</ng-template>

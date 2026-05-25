@@ -1,0 +1,54 @@
+<div class="page px-4">
+
+  <h3 class="mb-4">Dashboard</h3>
+<div class="stats-row">
+  <div class="stat-card">
+    <h3>Totale Prodotti</h3>
+    <p>{{ totalProducts }}</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>Prodotti in esaurimento</h3>
+    <p>{{ lowStock }}</p>
+  </div>
+
+  <div class="stat-card">
+      <h6>Valore Magazzino</h6>
+        <p class="value">{{ inventoryValue | currency:'EUR' }}</p>
+  </div>
+</div>
+  <!-- Charts -->
+<div class="charts-row">
+  <div class="chart-box">
+    <canvas id="categoryChart"></canvas>
+  </div>
+
+  <div class="chart-box">
+    <canvas id="stockChart"></canvas>
+  </div>
+</div>
+
+<div class="charts-row">
+  <div class="chart-box">
+    <h3>Prodotti in Esaurimento</h3>
+
+    <table class="low-stock-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Stock</th>
+          <th>Minimo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of getLowStockProducts()">
+          <td>{{ p.name }}</td>
+          <td>{{ p.stock }}</td>
+          <td>{{ p.minStock }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+

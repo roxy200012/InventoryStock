@@ -1,0 +1,58 @@
+<div class="page px-4" *ngIf="!loading; else loadingTpl">
+
+  <div class="header">
+    <h3>Nuovo Movimento</h3>
+    <button class="btn btn-secondary" [routerLink]="['/movements']">
+      Annulla
+    </button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="save()" class="card-form">
+
+    <div class="row g-3">
+
+      <div class="col-md-6">
+        <label class="form-label">Prodotto</label>
+        <select class="form-select" formControlName="productId">
+          <option [ngValue]="null" disabled>Seleziona prodotto</option>
+          <option *ngFor="let p of products" [value]="p.id">
+            {{ p.name }} (Stock: {{ p.stock }})
+          </option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Tipo</label>
+        <select class="form-select" formControlName="type">
+          <option value="IN">Carico</option>
+          <option value="OUT">Scarico</option>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label class="form-label">Quantità</label>
+        <input type="number" class="form-control" formControlName="quantity">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Data</label>
+        <input type="date" class="form-control" formControlName="date" >
+      </div>
+
+    </div>
+
+    <div class="mt-4 text-end">
+      <button class="btn btn-primary" [disabled]="form.invalid">
+        Salva Movimento
+      </button>
+    </div>
+
+  </form>
+
+</div>
+
+<ng-template #loadingTpl>
+  <div class="px-4 py-5 text-center text-muted">
+    Caricamento...
+  </div>
+</ng-template>
